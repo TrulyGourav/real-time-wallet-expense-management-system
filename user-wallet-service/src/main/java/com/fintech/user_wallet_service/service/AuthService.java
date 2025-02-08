@@ -2,6 +2,7 @@ package com.fintech.user_wallet_service.service;
 
 import com.fintech.user_wallet_service.dto.LoginRequest;
 import com.fintech.user_wallet_service.dto.RegisterRequest;
+import com.fintech.user_wallet_service.exception.InvalidCredentialsException;
 import com.fintech.user_wallet_service.model.User;
 import com.fintech.user_wallet_service.repository.UserRepository;
 import com.fintech.user_wallet_service.util.JwtUtil;
@@ -25,14 +26,14 @@ public class AuthService {
         this.jwtUtil = jwtUtil;
     }
 
-    public String registerUser(RegisterRequest request) {
+    public void registerUser(RegisterRequest request) {
         Optional<User> isEmailExists = userRepository.findByEmail(request.getEmail());
         Optional<User> isUsernameExists = userRepository.findByUsername(request.getUsername());
         if(isEmailExists.isPresent()){
-            return "User Already Exists with the email";
+            throw new IllegalArgumentException("Email is already in use");
         }
         if(isUsernameExists.isPresent()){
-            return "This username is not available";
+            throw new IllegalArgumentException("Username is already in use");
         }
         User user = new User();
         user.setUsername(request.getUsername());
@@ -40,15 +41,15 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(request.getRole());
         userRepository.save(user);
-        return "User registered successfully";
     }
 
     public String loginUser(LoginRequest request) {
-        Optional<User> userOptional = userRepository.findByEmail(request.getEmail());
-        if (userOptional.isPresent() &&
-                passwordEncoder.matches(request.getPassword(), userOptional.get().getPassword())) {
-            return jwtUtil.generateToken(userOptional.get().getEmail());
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElseThrow(() -> new InvalidCredentialsException("Account does not exists with this Email"));
+
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new InvalidCredentialsException("Invalid email or password");
         }
-        throw new RuntimeException("Invalid credentials");
+        return jwtUtil.generateToken(user.getEmail());
     }
 }

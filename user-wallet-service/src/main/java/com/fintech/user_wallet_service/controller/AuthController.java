@@ -1,9 +1,13 @@
 package com.fintech.user_wallet_service.controller;
 
 import com.fintech.user_wallet_service.dto.LoginRequest;
+import com.fintech.user_wallet_service.dto.LoginResponse;
 import com.fintech.user_wallet_service.dto.RegisterRequest;
+import com.fintech.user_wallet_service.dto.ResponseMessage;
 import com.fintech.user_wallet_service.service.AuthService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,12 +27,13 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestBody RegisterRequest request) {
-        return authService.registerUser(request);
+    public ResponseEntity<ResponseMessage> register(@Valid @RequestBody RegisterRequest request) {
+        authService.registerUser(request);
+        return ResponseEntity.ok(new ResponseMessage("User registered successfully", 201));
     }
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest request) {
-        return authService.loginUser(request);
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request) {
+        return ResponseEntity.ok(new LoginResponse("Login Successful", authService.loginUser(request), 200));
     }
 }
