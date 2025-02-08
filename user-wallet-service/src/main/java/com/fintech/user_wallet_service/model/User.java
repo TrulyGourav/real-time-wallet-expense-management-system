@@ -1,5 +1,6 @@
 package com.fintech.user_wallet_service.model;
 
+import com.fintech.user_wallet_service.constant.Role;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -24,15 +25,29 @@ public class User {
     private String email;
 
     @Column(nullable = false)
-    private String role;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-    private Boolean active;
+    @Column(nullable = false)
+    private Boolean active = true;
+
+    @Column(nullable = false)
+    private Boolean isDeleted = false;
 
 //    @ElementCollection(fetch = FetchType.EAGER)
 //    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
 //    @Enumerated(EnumType.STRING)
 //    private Set<Role> roles;
 
+
+    public User(){}
+
+    public User(String username, String password, String email, Role role) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
 
     public Long getId() {
         return id;
@@ -66,11 +81,19 @@ public class User {
         this.email = email;
     }
 
-    public String getRole() {
+    public Boolean getDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        isDeleted = deleted;
+    }
+
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

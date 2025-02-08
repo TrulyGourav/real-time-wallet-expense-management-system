@@ -5,6 +5,7 @@ import com.fintech.user_wallet_service.dto.RegisterRequest;
 import com.fintech.user_wallet_service.exception.InvalidCredentialsException;
 import com.fintech.user_wallet_service.model.User;
 import com.fintech.user_wallet_service.repository.UserRepository;
+import com.fintech.user_wallet_service.util.CommonUtil;
 import com.fintech.user_wallet_service.util.JwtUtil;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -18,12 +19,14 @@ public class AuthService {
 
     private final UserRepository userRepository;
     private final WalletService walletService;
+    private final CommonUtil commonUtil;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
-    public AuthService(UserRepository userRepository, WalletService walletService, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
+    public AuthService(UserRepository userRepository, WalletService walletService, CommonUtil commonUtil, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
         this.walletService = walletService;
+        this.commonUtil = commonUtil;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
     }
@@ -41,7 +44,7 @@ public class AuthService {
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(request.getRole());
+        user.setRole(commonUtil.convertToRoleEnum(request.getRole()));
         userRepository.save(user);
         walletService.createWallet(user, 0.0);
     }
