@@ -16,6 +16,11 @@ public class WalletController {
         this.walletService = walletService;
     }
 
+    @GetMapping("/")
+    public String home(){
+        return "Hello to Wallet Controller";
+    }
+
     @PostMapping("/deposit")
     public String deposit(@RequestParam Long userId, @RequestParam double amount) {
         walletService.deposit(userId, amount);
