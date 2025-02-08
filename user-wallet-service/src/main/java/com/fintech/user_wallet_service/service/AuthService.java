@@ -17,11 +17,13 @@ import java.util.Optional;
 public class AuthService {
 
     private final UserRepository userRepository;
+    private final WalletService walletService;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
 
-    public AuthService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
+    public AuthService(UserRepository userRepository, WalletService walletService, PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
+        this.walletService = walletService;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
     }
@@ -41,6 +43,7 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(request.getRole());
         userRepository.save(user);
+        walletService.createWallet(user, 0.0);
     }
 
     public String loginUser(LoginRequest request) {

@@ -1,9 +1,15 @@
 package com.fintech.user_wallet_service.controller;
 
+import com.fintech.user_wallet_service.dto.GenericResponse;
+import com.fintech.user_wallet_service.dto.LoginResponse;
 import com.fintech.user_wallet_service.model.Wallet;
 import com.fintech.user_wallet_service.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/wallet")
@@ -22,13 +28,17 @@ public class WalletController {
     }
 
     @PostMapping("/deposit")
-    public String deposit(@RequestParam Long userId, @RequestParam double amount) {
+    public ResponseEntity<GenericResponse<Map<String, Object>>> deposit(@RequestParam Long userId, @RequestParam double amount) {
         walletService.deposit(userId, amount);
-        return "Amount successfully deposited!";
+        return ResponseEntity.ok(new GenericResponse("Amount Deposited Successfully", 200));
     }
 
     @GetMapping("/balance/{userId}")
-    public double getBalance(@PathVariable Long userId) {
-        return walletService.getBalance(userId);
+    public ResponseEntity<GenericResponse<Map<String, Object>>> getBalance(@PathVariable Long userId) {
+        double balance =  walletService.getBalance(userId);
+
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("balance", balance);
+        return ResponseEntity.ok(new GenericResponse("Balance Fetched Successfully", 200, dataMap));
     }
 }

@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "wallets")
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class Wallet {
 
@@ -21,6 +20,10 @@ public class Wallet {
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    // Default Constructor
+    public Wallet() {
+    }
 
     // Custom constructor for creating Wallet with user and balance
     public Wallet(User user, double balance) {

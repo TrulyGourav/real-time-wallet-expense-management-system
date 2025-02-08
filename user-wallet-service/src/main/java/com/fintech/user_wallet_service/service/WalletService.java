@@ -31,10 +31,14 @@ public class WalletService {
         walletRepository.save(wallet);
     }
 
-
     public double getBalance(Long userId) {
-        return walletRepository.findById(userId)
+        return walletRepository.findByUser_Id(userId)
                 .orElseThrow(() -> new RuntimeException("Wallet not found"))
                 .getBalance();
+    }
+
+    public void createWallet(User user, double balance) {
+        Wallet wallet = new Wallet(user, balance);
+        walletRepository.save(wallet);
     }
 }
