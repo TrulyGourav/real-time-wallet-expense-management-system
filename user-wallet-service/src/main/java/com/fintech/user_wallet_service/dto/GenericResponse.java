@@ -1,16 +1,24 @@
 package com.fintech.user_wallet_service.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.Map;
+
 @Data
-public class ResponseMessage {
+public class GenericResponse<T extends Map<String, ?>> {
     private String message;
     private int statusCode;
+    private T data;
 
-    public ResponseMessage(String message, int statusCode) {
+    public GenericResponse(String message, int statusCode) {
         this.message = message;
         this.statusCode = statusCode;
+    }
+
+    public GenericResponse(String message, int statusCode, T data) {
+        this.message = message;
+        this.statusCode = statusCode;
+        this.data = data;
     }
 
     public String getMessage() {
@@ -27,5 +35,13 @@ public class ResponseMessage {
 
     public void setStatusCode(int statusCode) {
         this.statusCode = statusCode;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 }
