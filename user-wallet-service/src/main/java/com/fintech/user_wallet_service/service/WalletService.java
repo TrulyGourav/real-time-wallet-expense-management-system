@@ -17,8 +17,9 @@ public class WalletService {
     private UserRepository userRepository;
 
     @Autowired
-    public WalletService(WalletRepository walletRepository) {
+    public WalletService(WalletRepository walletRepository, UserRepository userRepository) {
         this.walletRepository = walletRepository;
+        this.userRepository = userRepository;
     }
 
     @Transactional
