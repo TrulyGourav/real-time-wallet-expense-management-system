@@ -28,13 +28,13 @@ public class WalletController {
     }
 
     @PostMapping("/deposit")
-    public ResponseEntity<GenericResponse<Map<String, Object>>> deposit(@RequestParam Long userId, @RequestParam double amount) {
+    public ResponseEntity<GenericResponse<Map<String, Object>>> deposit(@RequestParam String userId, @RequestParam double amount) {
         walletService.deposit(userId, amount);
         return ResponseEntity.ok(new GenericResponse("Amount Deposited Successfully", 200));
     }
 
     @GetMapping("/balance/{userId}")
-    public ResponseEntity<GenericResponse<Map<String, Object>>> getBalance(@PathVariable Long userId) {
+    public ResponseEntity<GenericResponse<Map<String, Object>>> getBalance(@PathVariable String userId) {
         double balance =  walletService.getBalance(userId);
 
         Map<String, Object> dataMap = new HashMap<>();

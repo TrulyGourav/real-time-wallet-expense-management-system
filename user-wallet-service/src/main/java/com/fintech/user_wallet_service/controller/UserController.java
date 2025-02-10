@@ -24,7 +24,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<GenericResponse<Map<String, Object>>> getUserById(@PathVariable Long id) {
+    public ResponseEntity<GenericResponse<Map<String, Object>>> getUserById(@PathVariable String id) {
         User user = userService.getUserById(id);
 
         Map<String, Object> dataMap = new HashMap<>();

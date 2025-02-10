@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 //@RequiredArgsConstructor
@@ -41,6 +42,8 @@ public class AuthService {
             throw new IllegalArgumentException("Username is already in use");
         }
         User user = new User();
+        String randomUserId = UUID.randomUUID().toString();
+        user.setId(randomUserId);
         user.setUsername(request.getUsername());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));

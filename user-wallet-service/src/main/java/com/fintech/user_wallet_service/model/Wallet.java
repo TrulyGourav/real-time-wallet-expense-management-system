@@ -12,8 +12,7 @@ import java.math.BigDecimal;
 public class Wallet {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String id;
 
     private double balance;
 
@@ -26,16 +25,17 @@ public class Wallet {
     }
 
     // Custom constructor for creating Wallet with user and balance
-    public Wallet(User user, double balance) {
+    public Wallet(String id, User user, double balance) {
+        this.id = id;
         this.user = user;
         this.balance = balance;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
