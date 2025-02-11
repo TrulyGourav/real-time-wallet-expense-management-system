@@ -10,11 +10,11 @@ import java.util.List;
 
 public class ExpenseCategoryRequest {
 
-    @NotBlank(message = "Main category cannot be blank.")
+    @NotBlank(message = "Main category is required")
     private String mainCategory;
 
-    @NotEmpty(message = "Sub-categories list cannot be empty.")
-    private List<@NotBlank(message = "Sub-category cannot be blank.") String> subCategories;
+    @NotEmpty(message = "Sub-categories list cannot be empty")
+    private List<@NotBlank(message = "Sub-category cannot be blank") String> subCategories;
 
     public ExpenseCategoryRequest() {
     }

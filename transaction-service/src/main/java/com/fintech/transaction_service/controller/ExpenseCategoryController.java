@@ -3,6 +3,7 @@ package com.fintech.transaction_service.controller;
 import com.fintech.transaction_service.dto.ExpenseCategoryRequest;
 import com.fintech.transaction_service.model.ExpenseCategory;
 import com.fintech.transaction_service.service.ExpenseCategoryService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class ExpenseCategoryController {
     private ExpenseCategoryService expenseCategoryService;
 
     @PostMapping
-    public ResponseEntity<ExpenseCategory> addCategory(@RequestBody ExpenseCategoryRequest expenseCategoryRequest) {
+    public ResponseEntity<ExpenseCategory> addCategory(@Valid @RequestBody ExpenseCategoryRequest expenseCategoryRequest) {
         ExpenseCategory createdCategory = expenseCategoryService.addCategory(expenseCategoryRequest);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCategory);
     }
@@ -37,7 +38,7 @@ public class ExpenseCategoryController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ExpenseCategory> updateCategory(@PathVariable String id, @RequestBody ExpenseCategoryRequest expenseCategoryRequest) {
+    public ResponseEntity<ExpenseCategory> updateCategory(@Valid @PathVariable String id, @RequestBody ExpenseCategoryRequest expenseCategoryRequest) {
         ExpenseCategory updatedCategory = expenseCategoryService.updateCategory(id, expenseCategoryRequest);
         return ResponseEntity.ok(updatedCategory);
     }
