@@ -1,0 +1,110 @@
+db.expense_categories.insertMany([
+  {
+    "mainCategory": "Housing",
+    "subCategories": ["Rent", "Mortgage", "Property Taxes", "Home Maintenance/Repairs"],
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "mainCategory": "Utilities",
+    "subCategories": ["Electricity", "Water", "Gas", "Internet", "Cable TV", "Waste Management"],
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "mainCategory": "Transportation",
+    "subCategories": ["Fuel", "Public Transport", "Car Loan/Lease", "Car Maintenance", "Insurance", "Tolls/Parking Fees"],
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "mainCategory": "Groceries & Food",
+    "subCategories": ["Daily Needs", "Fresh Produce (Fruits/Vegetables)", "Packaged Foods", "Beverages", "Meat & Seafood", "Bakery Items"],
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "mainCategory": "Dining & Entertainment",
+    "subCategories": ["Restaurants & Cafes", "Bars & Clubs", "Movies & Concerts", "Streaming Subscriptions"],
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "mainCategory": "Fitness & Wellness",
+    "subCategories": ["Gym Membership", "Yoga/Pilates Classes", "Supplements", "Sports Equipment"],
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "mainCategory": "Personal Care",
+    "subCategories": ["Haircuts & Salons", "Skincare & Cosmetics", "Spa & Massage", "Hygiene Products"],
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "mainCategory": "Health & Medical",
+    "subCategories": ["Doctor Visits", "Medications", "Health Insurance", "Therapy & Counseling", "Dental Care"],
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "mainCategory": "Insurance",
+    "subCategories": ["Life Insurance", "Health Insurance", "Vehicle Insurance", "Property Insurance"],
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "mainCategory": "Education",
+    "subCategories": ["Tuition Fees", "Online Courses", "Books & Supplies", "Workshops & Certifications"],
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "mainCategory": "Childcare & Parenting",
+    "subCategories": ["Babysitting", "School Fees", "Childcare Supplies", "Extracurricular Activities"],
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "mainCategory": "Pets",
+    "subCategories": ["Food & Supplies", "Vet Visits", "Grooming", "Pet Insurance"],
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "mainCategory": "Travel & Vacations",
+    "subCategories": ["Flights", "Accommodation", "Car Rentals", "Sightseeing", "Travel Insurance"],
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "mainCategory": "Shopping & Apparel",
+    "subCategories": ["Clothing & Accessories", "Footwear", "Jewelry", "Gadgets & Electronics"],
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "mainCategory": "Gifts & Donations",
+    "subCategories": ["Gifts for Friends & Family", "Charitable Donations", "Religious Contributions"],
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "mainCategory": "Investments & Savings",
+    "subCategories": ["Stocks", "Mutual Funds", "Retirement Accounts", "Fixed Deposits", "Cryptocurrencies"],
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "mainCategory": "Debt Payments",
+    "subCategories": ["Loan EMI", "Credit Card Payments", "Personal Loans"],
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  },
+  {
+    "mainCategory": "Miscellaneous",
+    "subCategories": ["Subscription Services", "Professional Services (Legal, Accounting)", "Bank Charges", "Other Expenses"],
+    "createdAt": new Date(),
+    "updatedAt": new Date()
+  }
+]);
