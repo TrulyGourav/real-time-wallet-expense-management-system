@@ -2,7 +2,9 @@ package com.fintech.transaction_service.model;
 
 import com.fintech.transaction_service.constant.TransactionType;
 import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -39,4 +41,13 @@ public class Transaction {
     private Instant transactionDate;
 
     private String note;
+
+    @CreatedDate
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private Instant createdAt;
+
+    @LastModifiedDate
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    private Instant updatedAt;
+
 }
