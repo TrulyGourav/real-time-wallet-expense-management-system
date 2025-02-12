@@ -28,8 +28,9 @@ public class ExpenseCategoryService {
         return expenseCategoryRepository.findAll();
     }
 
-    public Optional<ExpenseCategory> getCategoryById(String id) {
-        return expenseCategoryRepository.findById(id);
+    public ExpenseCategory getCategoryById(String id) {
+        return expenseCategoryRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
     }
 
     public ExpenseCategory updateCategory(String id, ExpenseCategoryRequest expenseCategoryRequest) {

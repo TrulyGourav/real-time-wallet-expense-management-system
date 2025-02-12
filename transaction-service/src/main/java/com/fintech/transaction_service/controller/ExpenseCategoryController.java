@@ -32,8 +32,8 @@ public class ExpenseCategoryController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ExpenseCategory> getCategoryById(@PathVariable String id) {
-        ExpenseCategory category = expenseCategoryService.getCategoryById(id)
-                .orElseThrow(() -> new RuntimeException("Category not found with id: " + id));
+        ExpenseCategory category = expenseCategoryService.getCategoryById(id);
+
         return ResponseEntity.ok(category);
     }
 
