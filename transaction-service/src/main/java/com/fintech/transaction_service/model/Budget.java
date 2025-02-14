@@ -60,8 +60,6 @@ public class Budget {
 
     private BigDecimal miscellaneousBudget;
 
-    private TransactionType type;
-
     @CreatedDate
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Instant createdAt;
