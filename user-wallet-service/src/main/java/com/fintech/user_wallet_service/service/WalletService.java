@@ -14,7 +14,7 @@ import java.util.UUID;
 public class WalletService {
 
     private final WalletRepository walletRepository;
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public WalletService(WalletRepository walletRepository, UserRepository userRepository) {
@@ -32,6 +32,11 @@ public class WalletService {
 
         wallet.setBalance(wallet.getBalance() + amount);
         walletRepository.save(wallet);
+    }
+
+    public Wallet getWalletByUserId(String userId) {
+        return walletRepository.findByUser_Id(userId)
+                .orElseThrow(() -> new RuntimeException("Wallet not found"));
     }
 
     public double getBalance(String userId) {

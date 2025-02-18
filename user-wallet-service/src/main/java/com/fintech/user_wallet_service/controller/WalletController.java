@@ -33,6 +33,15 @@ public class WalletController {
         return ResponseEntity.ok(new GenericResponse("Amount Deposited Successfully", 200));
     }
 
+    @GetMapping("/{userId}")
+    public ResponseEntity<GenericResponse<Map<String, Object>>> getWalletByUserId(@PathVariable String userId) {
+        Wallet wallet =  walletService.getWalletByUserId(userId);
+
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("wallet", wallet);
+        return ResponseEntity.ok(new GenericResponse("wallet Fetched Successfully", 200, dataMap));
+    }
+
     @GetMapping("/balance/{userId}")
     public ResponseEntity<GenericResponse<Map<String, Object>>> getBalance(@PathVariable String userId) {
         double balance =  walletService.getBalance(userId);
