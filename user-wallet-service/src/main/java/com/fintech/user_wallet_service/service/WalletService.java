@@ -34,6 +34,18 @@ public class WalletService {
         walletRepository.save(wallet);
     }
 
+    @Transactional
+    public void credit(String userId, double amount) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        Wallet wallet = walletRepository.findByUser_Id(userId)
+                .orElseThrow(() -> new RuntimeException("Wallet for userId "+userId+" not found"));
+
+        wallet.setBalance(wallet.getBalance() + amount);
+        walletRepository.save(wallet);
+    }
+
     public Wallet getWalletByUserId(String userId) {
         return walletRepository.findByUser_Id(userId)
                 .orElseThrow(() -> new RuntimeException("Wallet not found"));
