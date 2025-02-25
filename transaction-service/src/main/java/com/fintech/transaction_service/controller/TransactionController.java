@@ -19,11 +19,11 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-//    @PostMapping
-//    public ResponseEntity<Transaction> createTransaction(@Valid @RequestBody TransactionRequestDTO transactionRequest) {
-//        Transaction transaction = transactionService.createTransaction(transactionRequest);
-//        return new ResponseEntity<>(transaction, HttpStatus.CREATED);
-//    }
+    @PostMapping
+    public ResponseEntity<Transaction> createTransaction(@Valid @RequestBody TransactionRequestDTO transactionRequest) {
+        Transaction transaction = transactionService.createTransaction(transactionRequest);
+        return new ResponseEntity<>(transaction, HttpStatus.CREATED);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Transaction> getTransactionById(@PathVariable String id) {
