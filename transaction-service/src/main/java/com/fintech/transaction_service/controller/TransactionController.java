@@ -19,6 +19,7 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
+    // manage
     @PostMapping
     public ResponseEntity<Transaction> createTransaction(@Valid @RequestBody TransactionRequestDTO transactionRequest) {
         Transaction transaction = transactionService.createTransaction(transactionRequest);
