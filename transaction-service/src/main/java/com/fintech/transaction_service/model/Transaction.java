@@ -50,4 +50,16 @@ public class Transaction {
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private Instant updatedAt;
 
+    public Transaction(String byUserId, String toUserId, String byWalletId, String toWalletId, BigDecimal amount, TransactionType type, String mainExpenseType, String subExpenseType, Instant transactionDate, String note) {
+        this.byUserId = byUserId;
+        this.toUserId = toUserId;
+        this.byWalletId = byWalletId;
+        this.toWalletId = toWalletId;
+        this.amount = amount;
+        this.type = type;
+        this.mainExpenseType = mainExpenseType;
+        this.subExpenseType = subExpenseType;
+        this.transactionDate = transactionDate;
+        this.note = note;
+    }
 }
