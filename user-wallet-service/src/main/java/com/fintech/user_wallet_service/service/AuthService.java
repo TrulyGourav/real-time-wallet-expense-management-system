@@ -11,6 +11,7 @@ import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -49,7 +50,7 @@ public class AuthService {
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setRole(commonUtil.convertToRoleEnum(request.getRole()));
         userRepository.save(user);
-        walletService.createWallet(user, 0.0);
+        walletService.createWallet(user, BigDecimal.valueOf(0.0));
     }
 
     public String loginUser(LoginRequest request) {
