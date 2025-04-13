@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Service
@@ -35,10 +36,19 @@ public class WalletService {
     }
 
     @Transactional
-    public void credit(String userId, double amount) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+    public void debit(String userId, double amount) {
+        Wallet wallet = walletRepository.findByUser_Id(userId)
+                .orElseThrow(() -> new RuntimeException("Wallet for userId "+userId+" not found"));
 
+        if (wallet.getBalance() < amount) {
+            throw new RuntimeException("Insufficient balance");
+        }
+        wallet.setBalance(wallet.getBalance() - amount);
+        walletRepository.save(wallet);
+    }
+
+    @Transactional
+    public void credit(String userId, double amount) {
         Wallet wallet = walletRepository.findByUser_Id(userId)
                 .orElseThrow(() -> new RuntimeException("Wallet for userId "+userId+" not found"));
 
@@ -48,7 +58,7 @@ public class WalletService {
 
     public Wallet getWalletByUserId(String userId) {
         return walletRepository.findByUser_Id(userId)
-                .orElseThrow(() -> new RuntimeException("Wallet not found"));
+                .orElseThrow(() -> new RuntimeException("Wallet for userId "+userId+" not found"));
     }
 
     public double getBalance(String userId) {
@@ -57,6 +67,7 @@ public class WalletService {
                 .getBalance();
     }
 
+    @Transactional
     public void createWallet(User user, double balance) {
         String randomWalletId = UUID.randomUUID().toString();
         Wallet wallet = new Wallet(randomWalletId, user, balance);

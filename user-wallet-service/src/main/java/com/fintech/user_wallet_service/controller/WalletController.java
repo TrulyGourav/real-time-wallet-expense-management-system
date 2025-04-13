@@ -50,4 +50,28 @@ public class WalletController {
         dataMap.put("balance", balance);
         return ResponseEntity.ok(new GenericResponse("Balance Fetched Successfully", 200, dataMap));
     }
+
+    @PutMapping("/debit")
+    public ResponseEntity<GenericResponse<Map<String, Object>>> debitWallet(
+            @RequestParam String userID,
+            @RequestParam double amount) {
+
+        walletService.debit(userID, amount);
+//        Map<String, Object> dataMap = new HashMap<>();
+//        dataMap.put("balance", null);
+        return ResponseEntity.ok(
+                new GenericResponse<>("Wallet debited successfully", 200, null)
+        );
+    }
+
+    @PutMapping("/credit")
+    public ResponseEntity<GenericResponse<Map<String, Object>>> creditWallet(
+            @RequestParam String userID,
+            @RequestParam double amount) {
+
+        walletService.credit(userID, amount);
+        return ResponseEntity.ok(
+                new GenericResponse<>("Wallet credited successfully", 200, null)
+        );
+    }
 }
