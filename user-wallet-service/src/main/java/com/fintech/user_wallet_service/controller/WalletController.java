@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +29,7 @@ public class WalletController {
     }
 
     @PostMapping("/deposit")
-    public ResponseEntity<GenericResponse<Map<String, Object>>> deposit(@RequestParam String userId, @RequestParam double amount) {
+    public ResponseEntity<GenericResponse<Map<String, Object>>> deposit(@RequestParam String userId, @RequestParam BigDecimal amount) {
         walletService.deposit(userId, amount);
         return ResponseEntity.ok(new GenericResponse("Amount Deposited Successfully", 200));
     }
@@ -44,7 +45,7 @@ public class WalletController {
 
     @GetMapping("/balance/{userId}")
     public ResponseEntity<GenericResponse<Map<String, Object>>> getBalance(@PathVariable String userId) {
-        double balance =  walletService.getBalance(userId);
+        BigDecimal balance =  walletService.getBalance(userId);
 
         Map<String, Object> dataMap = new HashMap<>();
         dataMap.put("balance", balance);
@@ -54,7 +55,7 @@ public class WalletController {
     @PutMapping("/debit")
     public ResponseEntity<GenericResponse<Map<String, Object>>> debitWallet(
             @RequestParam String userID,
-            @RequestParam double amount) {
+            @RequestParam BigDecimal amount) {
 
         walletService.debit(userID, amount);
 //        Map<String, Object> dataMap = new HashMap<>();
@@ -67,7 +68,7 @@ public class WalletController {
     @PutMapping("/credit")
     public ResponseEntity<GenericResponse<Map<String, Object>>> creditWallet(
             @RequestParam String userID,
-            @RequestParam double amount) {
+            @RequestParam BigDecimal amount) {
 
         walletService.credit(userID, amount);
         return ResponseEntity.ok(

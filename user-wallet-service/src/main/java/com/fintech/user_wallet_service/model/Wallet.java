@@ -14,7 +14,7 @@ public class Wallet {
     @Id
     private String id;
 
-    private double balance;
+    private BigDecimal balance;
 
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
@@ -25,7 +25,7 @@ public class Wallet {
     }
 
     // Custom constructor for creating Wallet with user and balance
-    public Wallet(String id, User user, double balance) {
+    public Wallet(String id, User user, BigDecimal balance) {
         this.id = id;
         this.user = user;
         this.balance = balance;
@@ -39,11 +39,11 @@ public class Wallet {
         this.id = id;
     }
 
-    public double getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(BigDecimal balance) {
         this.balance = balance;
     }
 
