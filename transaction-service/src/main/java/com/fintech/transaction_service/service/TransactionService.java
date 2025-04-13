@@ -5,6 +5,7 @@ import com.fintech.transaction_service.dto.TransactionRequestDTO;
 import com.fintech.transaction_service.dto.WalletResponseDTO;
 import com.fintech.transaction_service.model.Transaction;
 import com.fintech.transaction_service.repository.TransactionRepository;
+import jakarta.servlet.http.HttpServletRequest;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
