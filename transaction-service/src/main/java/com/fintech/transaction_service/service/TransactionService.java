@@ -31,10 +31,6 @@ public class TransactionService {
 
     private final TransactionProducer transactionProducer;
 
-//    public TransactionService(TransactionRepository transactionRepository, RestTemplate restTemplate) {
-//        this.transactionRepository = transactionRepository;
-//        this.restTemplate = restTemplate;
-//    }
     public TransactionService(TransactionRepository transactionRepository, TransactionProducer transactionProducer) {
         this.transactionRepository = transactionRepository;
         this.transactionProducer = transactionProducer;
