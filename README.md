@@ -16,14 +16,15 @@ The primary goal of this project is to build a **scalable, decoupled expense man
 
 ## ⚙️ Technology Stack
 
-| Component              | Technology             |
-|------------------------|------------------------|
-| ☕ Backend Framework    | Spring Boot (Java 17)  |
-| 📦 Messaging Queue     | Apache Kafka           |
-| 🧠 Analytics Engine     | Elasticsearch          |
-| 💾 User Wallet Service | MySQL                  |
-| 💸 Transaction Service | MongoDB + Elasticsearch |
-| 🐳 Containerization    | Docker & Docker Compose|
+| Component              | Technology               |
+|------------------------|--------------------------|
+| ☕ Backend Framework    | Spring Boot (Java 17)    |
+| 🔐 Authentication      | JWT (JSON Web Token)     |
+| 📦 Messaging Queue     | Apache Kafka             |
+| 🧠 Analytics Engine     | Elasticsearch            |
+| 💾 User-Wallet Service | MySQL                    |
+| 💸 Transaction Service | MongoDB + Elasticsearch  |
+| 🐳 Containerization    | Docker & Docker Compose  |
 
 ---
 
@@ -39,6 +40,15 @@ The primary goal of this project is to build a **scalable, decoupled expense man
 - Consumes transaction events from Kafka
 - Stores transaction data in **MongoDB**
 - Indexes transaction data in **Elasticsearch** for analytics
+
+---
+
+## 🔐 JWT-Based Authentication
+
+Both microservices are secured using **JWT tokens**:
+- Tokens are generated on login
+- Token validation occurs before accessing protected APIs
+- Ensures stateless, scalable authentication
 
 ---
 
