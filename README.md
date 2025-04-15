@@ -62,3 +62,14 @@ graph TD
     C -->|Produces Event| F[Kafka Topic]
     F -->|Consumes Event| C
     G[Analytics Client] -->|Query Data| E
+```
+
+# Project Status
+-----------------
+In Progress
+- Adding Testing modules
+- Adding custom filters and advance analytics
+
+Future Scope
+- Budget summary and reports (planned)
+- Category expenses
