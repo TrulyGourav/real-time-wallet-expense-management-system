@@ -3,8 +3,11 @@ package com.fintech.transaction_service.service;
 import com.fintech.transaction_service.constant.TransactionType;
 import com.fintech.transaction_service.dto.TransactionRequestDTO;
 import com.fintech.transaction_service.dto.WalletResponseDTO;
+import com.fintech.transaction_service.model.ElasticTransaction;
 import com.fintech.transaction_service.model.Transaction;
+import com.fintech.transaction_service.repository.ElasticTransactionRepository;
 import com.fintech.transaction_service.repository.TransactionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -29,6 +32,9 @@ public class TransactionProcessor {
 
     @Value("${internal.auth.token}")
     private String internalAuthToken;
+
+    @Autowired
+    private ElasticTransactionRepository elasticTransactionRepository;
 
     public TransactionProcessor(TransactionRepository transactionRepository, RestTemplate restTemplate) {
         this.transactionRepository = transactionRepository;
@@ -86,6 +92,24 @@ public class TransactionProcessor {
                 transactionRequest.getMainExpenseType(), transactionRequest.getSubExpenseType(),
                 Instant.now(), transactionRequest.getNote());
 
-        transactionRepository.save(transaction);
+        Transaction savedTransaction = transactionRepository.save(transaction);
+
+        ElasticTransaction elasticTransaction = ElasticTransaction.builder()
+                .id(savedTransaction.getId())
+                .byUserId(savedTransaction.getByUserId())
+                .toUserId(savedTransaction.getToUserId())
+                .byWalletId(savedTransaction.getByWalletId())
+                .toWalletId(savedTransaction.getToWalletId())
+                .amount(savedTransaction.getAmount())
+                .type(savedTransaction.getType().name())
+                .mainExpenseType(savedTransaction.getMainExpenseType())
+                .subExpenseType(savedTransaction.getSubExpenseType())
+                .transactionDate(savedTransaction.getTransactionDate())
+                .note(savedTransaction.getNote())
+                .createdAt(savedTransaction.getCreatedAt())
+                .updatedAt(savedTransaction.getUpdatedAt())
+                .build();
+
+        elasticTransactionRepository.save(elasticTransaction);
     }
 }

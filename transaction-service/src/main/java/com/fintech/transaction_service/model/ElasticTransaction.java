@@ -1,6 +1,7 @@
 package com.fintech.transaction_service.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -12,6 +13,7 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+@Builder
 @Document(indexName = "transactions")
 public class ElasticTransaction {
 
@@ -25,7 +27,7 @@ public class ElasticTransaction {
     private String toWalletId;
 
     private BigDecimal amount;
-    private String type; // Use String to avoid enum issues
+    private String type; // string- to avoid enum issues
 
     private String mainExpenseType;
     private String subExpenseType;
